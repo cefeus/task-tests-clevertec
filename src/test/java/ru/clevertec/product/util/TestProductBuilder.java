@@ -18,21 +18,25 @@ public class TestProductBuilder {
     public static final String STR_UUID = "d03c916f-a036-46e8-ae21-8c454f58b246";
     public static final String PRODUCT_NAME_REGEX = "^[а-яА-ЯЁё ]{5,10}$";
     public static final String PRODUCT_DESCRIPTION_REGEX = "^[а-яА-ЯЁё ]{10,30}$|null";
+    private final String DEFAULT_NAME = "Яблоко";
+    private final String DEFAULT_DESCRIPTION = "Сочное";
+    private final BigDecimal DEFAULT_PRICE = BigDecimal.valueOf(1.53);
+    private final LocalDateTime DEFAULT_CREATED = LocalDateTime.of(2023, Month.NOVEMBER, 1, 20, 15);
 
     @Builder.Default
     private UUID uuid = UUID.fromString(STR_UUID);
 
     @Builder.Default
-    private String name = "Яблоко";
+    private String name = DEFAULT_NAME;
 
     @Builder.Default
-    private String description = "Сочное";
+    private String description = DEFAULT_DESCRIPTION;
 
     @Builder.Default
-    private BigDecimal price = new BigDecimal("1.53");
+    private BigDecimal price = DEFAULT_PRICE;
 
     @Builder.Default
-    private LocalDateTime created = LocalDateTime.of(2023, Month.NOVEMBER, 1, 20, 15);
+    private LocalDateTime created = DEFAULT_CREATED;
 
     public Product buildProduct() {
         return new Product(uuid, name, description, price, created);
