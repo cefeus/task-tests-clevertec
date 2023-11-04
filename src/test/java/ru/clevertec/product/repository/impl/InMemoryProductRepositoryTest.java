@@ -2,6 +2,7 @@ package ru.clevertec.product.repository.impl;
 
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import ru.clevertec.product.entity.Product;
 import ru.clevertec.product.util.TestProductBuilder;
 
@@ -78,9 +79,12 @@ class InMemoryProductRepositoryTest {
     @Test
     void save_shouldReturnExactSavedProduct() {
         // given
+
         Product expected = TestProductBuilder.builder().build().buildProduct();
+
         // when
         Product actual = productRepository.save(expected);
+
         // then
         assertEquals(expected, actual);
 
@@ -90,10 +94,12 @@ class InMemoryProductRepositoryTest {
     void delete() {
         // given
         UUID passedUuid = UUID.fromString(TestProductBuilder.STR_UUID);
+        InMemoryProductRepository repositorySpy = Mockito.spy(InMemoryProductRepository.class);
         // when
-        productRepository.delete(passedUuid);
+        repositorySpy.delete(passedUuid);
+
         // then
-        verify(productRepository)
+        verify(repositorySpy)
                 .delete(passedUuid);
     }
 }

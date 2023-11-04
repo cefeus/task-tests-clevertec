@@ -8,6 +8,8 @@ import org.junit.jupiter.params.provider.NullSource;
 import ru.clevertec.product.data.InfoProductDto;
 import ru.clevertec.product.data.ProductDto;
 import ru.clevertec.product.entity.Product;
+import ru.clevertec.product.mapper.ProductMapper;
+import ru.clevertec.product.mapper.ProductMapperImpl;
 import ru.clevertec.product.util.TestProductBuilder;
 
 import java.math.BigDecimal;
@@ -18,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ProductMapperImplTest {
 
-    private ProductMapperImpl productMapper = new ProductMapperImpl();
+    private ProductMapper productMapper = new ProductMapperImpl();
 
     private static Stream<UUID> paramUuid() {
         return Stream.of(
@@ -31,7 +33,7 @@ class ProductMapperImplTest {
     @MethodSource("paramUuid")
     @NullSource
     @Test
-    void toProduct_shouldReturnProductWithoutUUID(UUID uuid) {
+    void toProduct_shouldReturnProductWithoutUUID_IndependentlyOfUUIDValue(UUID uuid) {
         // given
         Product expected = TestProductBuilder.builder()
                 .withUuid(uuid)
